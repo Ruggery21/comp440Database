@@ -50,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     if(pass.equals(repass)){
                         Boolean checkuser = DB.checkusername(user);
-                        if(checkuser == false){
+                        Boolean checkemail = DB.checkuseremail(email);
+                        if(checkuser == false || checkemail == false){
                             Boolean insert = DB.insertData(user, pass, fName, lName, email);
                             if(insert == true){
                                 Toast.makeText(MainActivity.this, "Registration Successfully", Toast.LENGTH_SHORT).show();
@@ -61,7 +62,10 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(MainActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        else{
+                        else if(checkemail==true){
+                            Toast.makeText(MainActivity.this, "Email already exists!!! Try Again", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(checkuser==true){
                             Toast.makeText(MainActivity.this, "User already exists!!! Try Again.", Toast.LENGTH_SHORT).show();
                         }
                     }
