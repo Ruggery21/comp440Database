@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textSize="15sp"
-        android:text="Successfuly Logged in to Home screen"
+        android:text="Successfully Logged in to Home screen"
         tools:layout_editor_absoluteX="177dp"
         tools:layout_editor_absoluteY="302dp" />
 </RelativeLayout>

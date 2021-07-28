@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     if(pass.equals(repass)){
                         Boolean checkuser = DB.checkusername(user);
                         Boolean checkemail = DB.checkuseremail(email);
-                        if(checkuser == false || checkemail == false){
+                        if(checkuser == false && checkemail == false){
                             Boolean insert = DB.insertData(user, pass, fName, lName, email);
                             if(insert == true){
                                 Toast.makeText(MainActivity.this, "Registration Successfully", Toast.LENGTH_SHORT).show();
