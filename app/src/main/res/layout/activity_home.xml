@@ -10,9 +10,18 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
         android:textSize="15sp"
-        android:text="Successfully Logged in to Home screen"
-        tools:layout_editor_absoluteX="177dp"
-        tools:layout_editor_absoluteY="302dp" />
+        android:text="Successfully Logged in to Home screen"/>
+
+    <Button
+        android:id="@+id/initializeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:text="Initialize Database"/>
+
 </RelativeLayout>
