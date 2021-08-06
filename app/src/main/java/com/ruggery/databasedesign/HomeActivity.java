@@ -2,6 +2,7 @@ package com.ruggery.databasedesign;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 public class HomeActivity extends AppCompatActivity {
     private Button initializeButton;
+    private Button blogBtn;
     private TextView userView;
 
     MultiDBHelper multiDB;
@@ -24,11 +26,13 @@ public class HomeActivity extends AppCompatActivity {
         String user = getIntent().getStringExtra("user_key");
 
         initializeButton = findViewById(R.id.initializeButton);
+        blogBtn = findViewById(R.id.navToBlog);
 
         //Displays what user is logged in
         userView = findViewById(R.id.userView);
         userView.setText(user);
 
+        //Database this here
         multiDB = new MultiDBHelper(this);
 
         initializeButton.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +45,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        blogBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(HomeActivity.this, "Opening blogs", Toast.LENGTH_SHORT).show();
 
+                Intent blogIntent = new Intent(getApplicationContext(), BlogActivity.class);
+                startActivity(blogIntent);
+            }
+        });
     }
 }
