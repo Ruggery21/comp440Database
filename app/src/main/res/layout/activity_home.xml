@@ -8,11 +8,6 @@
     android:orientation="vertical"
     tools:context=".HomeActivity">
 
-    <!--
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSubject"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/> -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
@@ -26,8 +21,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_margin="12dp"
-        android:backgroundTint="@color/colorAccent" />
-       <!-- android:src="@drawable/ic_add_black_24dp"/> -->
+        android:backgroundTint="@color/colorAccent"
+        android:src="@drawable/ic_add_black_24dp"/>
 
 
 </RelativeLayout>
