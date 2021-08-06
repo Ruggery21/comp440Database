@@ -5,6 +5,7 @@ public class NoteModel {
     String ID;
     String title;
     String des;
+    String tags;
 
     public String getID() {
         return ID;
@@ -28,6 +29,14 @@ public class NoteModel {
 
     public void setDes(String des) {
         this.des = des;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
 }

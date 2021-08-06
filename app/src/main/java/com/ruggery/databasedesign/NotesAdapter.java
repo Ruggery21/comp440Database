@@ -43,6 +43,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
     public void onBindViewHolder(final NotesAdapter.viewHolder holder, final int position) {
         holder.title.setText(arrayList.get(position).getTitle());
         holder.description.setText(arrayList.get(position).getDes());
+        holder.tags.setText(arrayList.get(position).getTags());
         database_helper = new DatabaseHelper(context);
 
         holder.delete.setOnClickListener(new View.OnClickListener() {;
@@ -70,19 +71,20 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
-        TextView title, description;
+        TextView title, description, tags;
         ImageView delete, edit;
         public viewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
             description = (TextView) itemView.findViewById(R.id.description);
+            tags = (TextView) itemView.findViewById(R.id.tags);
             delete = (ImageView) itemView.findViewById(R.id.delete);
             edit = (ImageView) itemView.findViewById(R.id.edit);
         }
     }
 
     public void showDialog(final int pos) {
-        final EditText title, des;
+        final EditText title, des, tags;
         Button submit;
         final Dialog dialog = new Dialog(activity);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -98,10 +100,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
 
         title = (EditText) dialog.findViewById(R.id.title);
         des = (EditText) dialog.findViewById(R.id.description);
+        tags = (EditText) dialog.findViewById(R.id.tags);
         submit = (Button) dialog.findViewById(R.id.submit);
 
         title.setText(arrayList.get(pos).getTitle());
         des.setText(arrayList.get(pos).getDes());
+        tags.setText(arrayList.get(pos).getTags());
 
         submit.setOnClickListener(new View.OnClickListener() {;
             @Override
@@ -110,11 +114,16 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                     title.setError("Please Enter Title");
                 }else if(des.getText().toString().isEmpty()) {
                     des.setError("Please Enter Description");
-                }else {
+                }else if(tags.getText().toString().isEmpty()) {
+                        tags.setError("Please Enter Tag(s)");
+                }
+                else {
                     //updating note
-                    database_helper.updateNote(title.getText().toString(), des.getText().toString(), arrayList.get(pos).getID());
+                    database_helper.updateNote(title.getText().toString(), des.getText().toString(), tags.getText().toString(),
+                            arrayList.get(pos).getID());
                     arrayList.get(pos).setTitle(title.getText().toString());
                     arrayList.get(pos).setDes(des.getText().toString());
+                    arrayList.get(pos).setTags(tags.getText().toString());
                     dialog.cancel();
                     //notify list
                     notifyDataSetChanged();

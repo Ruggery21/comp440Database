@@ -27,6 +27,15 @@
         android:hint="Description"
         android:gravity="start"
         android:padding="15dp"/>
+    <EditText
+        android:id="@+id/tags"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:hint="Tag(s)"
+        android:gravity="start"
+        android:padding="15dp"/>
 
     <Button
         android:id="@+id/submit"

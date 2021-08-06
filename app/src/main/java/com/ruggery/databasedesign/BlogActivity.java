@@ -55,7 +55,7 @@ public class BlogActivity extends AppCompatActivity {
 
     //display dialog
     public void showDialog() {
-        final EditText title, des;
+        final EditText title, des, tags;
         Button submit;
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -71,6 +71,7 @@ public class BlogActivity extends AppCompatActivity {
 
         title = (EditText) dialog.findViewById(R.id.title);
         des = (EditText) dialog.findViewById(R.id.description);
+        tags = (EditText) dialog.findViewById(R.id.tags);
         submit = (Button) dialog.findViewById(R.id.submit);
 
         submit.setOnClickListener(new View.OnClickListener() {;
@@ -80,8 +81,10 @@ public class BlogActivity extends AppCompatActivity {
                     title.setError("Please Enter Title");
                 }else if(des.getText().toString().isEmpty()) {
                     des.setError("Please Enter Description");
+                }else if(tags.getText().toString().isEmpty()) {
+                        tags.setError("Please Enter a tag(s)");
                 }else {
-                    database_helper.addNotes(title.getText().toString(), des.getText().toString());
+                    database_helper.addNotes(title.getText().toString(), des.getText().toString(), tags.getText().toString());
                     dialog.cancel();
                     displayNotes();
                 }

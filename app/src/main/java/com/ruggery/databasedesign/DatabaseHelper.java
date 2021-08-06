@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query;
         //creating table
-        query = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY, Title TEXT, Description TEXT)";
+        query = "CREATE TABLE " + TABLE_NAME + "(ID INTEGER PRIMARY KEY, Title TEXT, Description TEXT, Tags TEXT)";
         db.execSQL(query);
     }
 
@@ -35,11 +35,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //add the new note
-    public void addNotes(String title, String des) {
+    public void addNotes(String title, String des, String tags) {
         SQLiteDatabase sqLiteDatabase = this .getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("Title", title);
         values.put("Description", des);
+        values.put("Tags", tags);
 
         //inserting new row
         sqLiteDatabase.insert(TABLE_NAME, null , values);
@@ -64,6 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 noteModel.setID(cursor.getString(0));
                 noteModel.setTitle(cursor.getString(1));
                 noteModel.setDes(cursor.getString(2));
+                noteModel.setTags(cursor.getString(3));
                 arrayList.add(noteModel);
             }while (cursor.moveToNext());
         }
@@ -79,11 +81,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //update the note
-    public void updateNote(String title, String des, String ID) {
+    public void updateNote(String title, String des, String tags, String ID) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values =  new ContentValues();
         values.put("Title", title);
         values.put("Description", des);
+        values.put("Tag(s)", tags);
         //updating row
         sqLiteDatabase.update(TABLE_NAME, values, "ID=" + ID, null);
         sqLiteDatabase.close();
