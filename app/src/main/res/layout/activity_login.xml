@@ -19,27 +19,35 @@
         android:id="@+id/usernameLogin"
         android:layout_width="225dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/loginTitle"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="90dp"
-        android:hint="Username" />
+        android:fontFamily="sans-serif-medium"
+        android:hint="Username"
+        android:textColor="#000000" />
 
     <EditText
         android:id="@+id/passwordLogin"
         android:layout_width="225dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/usernameLogin"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:hint="Password" />
+        android:backgroundTint="#E1E1E1"
+        android:fallbackLineSpacing="false"
+        android:fontFamily="sans-serif-medium"
+        android:hint="Password"
+        android:textColor="#000000"
+        android:typeface="normal" />
 
     <Button
         android:id="@+id/loginButton"
         android:layout_width="225dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/passwordLogin"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:text="Login" />
+        android:text="Login"
+        app:cornerRadius="10sp" />
 
 </RelativeLayout>
