@@ -86,7 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values =  new ContentValues();
         values.put("Title", title);
         values.put("Description", des);
-        values.put("Tag(s)", tags);
+        values.put("Tags", tags);
         //updating row
         sqLiteDatabase.update(TABLE_NAME, values, "ID=" + ID, null);
         sqLiteDatabase.close();
