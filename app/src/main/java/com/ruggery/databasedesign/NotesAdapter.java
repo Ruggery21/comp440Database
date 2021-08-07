@@ -19,13 +19,18 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> {
 
     Context context;
     Activity activity;
     ArrayList<NoteModel> arrayList;
-    DatabaseHelper database_helper;
+    //DatabaseHelper database_helper;
+    MultiDBHelper multiDBHelper;
+    private SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
+    private String currentDate = sdf.format(new Date());
 
     public NotesAdapter(Context context,Activity activity, ArrayList<NoteModel> arrayList) {
         this.context = context;
@@ -44,13 +49,15 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
         holder.title.setText(arrayList.get(position).getTitle());
         holder.description.setText(arrayList.get(position).getDes());
         holder.tags.setText(arrayList.get(position).getTags());
-        database_helper = new DatabaseHelper(context);
+        multiDBHelper = new MultiDBHelper(context);
 
         holder.delete.setOnClickListener(new View.OnClickListener() {;
             @Override
             public void onClick(View v) {
                 //deleting note
-                database_helper.delete(arrayList.get(position).getID());
+                multiDBHelper.delete(arrayList.get(position).getID());
+                //deleting tag
+                multiDBHelper.deleteTags(arrayList.get(position).getID());
                 arrayList.remove(position);
                 notifyDataSetChanged();
             }
@@ -119,8 +126,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                 }
                 else {
                     //updating note
-                    database_helper.updateNote(title.getText().toString(), des.getText().toString(), tags.getText().toString(),
-                            arrayList.get(pos).getID());
+                    multiDBHelper.updateNote(title.getText().toString(), des.getText().toString(), currentDate, arrayList.get(pos).getID());
+                    multiDBHelper.updateTags(tags.getText().toString(), arrayList.get(pos).getID());
                     arrayList.get(pos).setTitle(title.getText().toString());
                     arrayList.get(pos).setDes(des.getText().toString());
                     arrayList.get(pos).setTags(tags.getText().toString());

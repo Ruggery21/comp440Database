@@ -19,21 +19,30 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class BlogActivity extends AppCompatActivity {
 
     ArrayList<NoteModel> arrayList;
     RecyclerView recyclerView;
     FloatingActionButton actionButton;
-    DatabaseHelper database_helper;
+    MultiDBHelper multiDBHelper;
+    private SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
+    private String currentDate = sdf.format(new Date());
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_blog);
 
+        String user = getIntent().getStringExtra("user_key");
+        username = user;
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         actionButton = (FloatingActionButton) findViewById(R.id.add);
-        database_helper = new DatabaseHelper(this);
+        multiDBHelper = new MultiDBHelper(this);
         displayNotes();
 
         actionButton.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +55,7 @@ public class BlogActivity extends AppCompatActivity {
 
     //display notes list
     public void displayNotes() {
-        arrayList = new ArrayList<>(database_helper.getNotes());
+        arrayList = new ArrayList<>(multiDBHelper.getNotes());
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         NotesAdapter adapter = new NotesAdapter(getApplicationContext(), this, arrayList);
@@ -84,7 +93,8 @@ public class BlogActivity extends AppCompatActivity {
                 }else if(tags.getText().toString().isEmpty()) {
                         tags.setError("Please Enter a tag(s)");
                 }else {
-                    database_helper.addNotes(title.getText().toString(), des.getText().toString(), tags.getText().toString());
+                    multiDBHelper.addNotes(title.getText().toString(), des.getText().toString(), currentDate, username);
+                    multiDBHelper.addTags(tags.getText().toString());
                     dialog.cancel();
                     displayNotes();
                 }
