@@ -65,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 noteModel.setID(cursor.getString(0));
                 noteModel.setTitle(cursor.getString(1));
                 noteModel.setDes(cursor.getString(2));
-                noteModel.setTags(cursor.getString(3));
+                //noteModel.setTags(cursor.getString(3));  //change made here
                 arrayList.add(noteModel);
             }while (cursor.moveToNext());
         }

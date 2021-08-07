@@ -51,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "Opening blogs", Toast.LENGTH_SHORT).show();
 
                 Intent blogIntent = new Intent(getApplicationContext(), BlogActivity.class);
+                blogIntent.putExtra("user_key", user);
                 startActivity(blogIntent);
             }
         });
