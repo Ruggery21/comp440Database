@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">DatabaseDesign</string>
+    <string-array name="hobbies">
+        <item>hiking</item>
+        <item>swimming</item>
+        <item>calligraphy</item>
+        <item>bowling</item>
+        <item>movie</item>
+        <item>cooking</item>
+        <item>dancing</item>
+    </string-array>
 </resources>
