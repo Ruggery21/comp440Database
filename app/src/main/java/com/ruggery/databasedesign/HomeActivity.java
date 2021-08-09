@@ -3,19 +3,25 @@ package com.ruggery.databasedesign;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity{
+    private TextView userView;
     private Button initializeButton;
     private Button blogBtn;
-    private TextView userView;
+    private Spinner hobbySpinner;
+    private Button submitHobby;
 
     MultiDBHelper multiDB;
-    DBHelper DB;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +30,15 @@ public class HomeActivity extends AppCompatActivity {
 
         //Gets username from login page
         String user = getIntent().getStringExtra("user_key");
+        //Displays what user is logged in
+        userView = findViewById(R.id.userView);
+        userView.setText(user);
 
         initializeButton = findViewById(R.id.initializeButton);
         blogBtn = findViewById(R.id.navToBlog);
 
-        //Displays what user is logged in
-        userView = findViewById(R.id.userView);
-        userView.setText(user);
+        hobbySpinner = findViewById(R.id.hobbySpinner);
+        submitHobby = findViewById(R.id.submitHobby);
 
         //Database this here
         multiDB = new MultiDBHelper(this);
@@ -53,6 +61,15 @@ public class HomeActivity extends AppCompatActivity {
                 Intent blogIntent = new Intent(getApplicationContext(), BlogActivity.class);
                 blogIntent.putExtra("user_key", user);
                 startActivity(blogIntent);
+            }
+        });
+
+        submitHobby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String hobby = hobbySpinner.getSelectedItem().toString();
+                multiDB.addHobby(user, hobby);
+                Toast.makeText(HomeActivity.this, hobby, Toast.LENGTH_SHORT).show();
             }
         });
     }

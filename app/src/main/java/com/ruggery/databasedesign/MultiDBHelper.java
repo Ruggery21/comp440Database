@@ -29,7 +29,7 @@ public class MultiDBHelper extends SQLiteOpenHelper {
 
         multiDB.execSQL("create Table comments(comment_id INTEGER primary key, sentiment TEXT, description TEXT, cdate TEXT, blog_id INTEGER, posted_by TEXT)");
 
-        multiDB.execSQL("create Table hobbies(username TEXT primary key, hobby TEXT)");
+        multiDB.execSQL("create Table hobbies(hobby TEXT primary key, username TEXT)");
 
         multiDB.execSQL("create Table follows(leadername TEXT primary key, followername TEXT)");
     }
@@ -76,6 +76,16 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         //inserting new row
         sqLiteDatabase.insert("blogstags", null , values);
         //close database connection
+        sqLiteDatabase.close();
+    }
+
+    public void addHobby(String user, String hobbies){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("hobby", hobbies);
+        values.put("username", user);
+
+        sqLiteDatabase.insert("hobbies", null, values);
         sqLiteDatabase.close();
     }
 
@@ -136,6 +146,19 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         //updating row
         sqLiteDatabase.update("blogstags", values, "blog_id=" + ID, null);
         sqLiteDatabase.close();
+    }
+
+    public String getUsername(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT created_by FROM blogs WHERE blog_id = " + id, null);
+        String data = "";
+        if(cursor.moveToFirst()){
+            do{
+                data = cursor.getString(0);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return data;
     }
 
 }

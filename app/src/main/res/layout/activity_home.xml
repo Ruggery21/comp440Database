@@ -7,42 +7,52 @@
     tools:context=".HomeActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="15sp"
-        android:text="Successfully Logged in to Home screen"/>
-
-    <Button
-        android:id="@+id/initializeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="25dp"
-        android:layout_centerHorizontal="true"
-        android:text="Initialize Database"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/navToBlog"
-        android:layout_below="@id/initializeButton"
-        android:layout_marginTop="35dp"
-        android:layout_centerInParent="true"
-        android:text="See blogs"
-        />
-
-    <TextView
         android:id="@+id/userView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/navToBlog"
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
         android:textSize="30sp"
         android:hint="User: "/>
 
+    <Button
+        android:id="@+id/initializeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userView"
+        android:layout_marginTop="25dp"
+        android:layout_centerHorizontal="true"
+        android:text="Initialize Database"/>
 
+    <Button
+        android:id="@+id/navToBlog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/initializeButton"
+        android:layout_marginTop="35dp"
+        android:layout_centerInParent="true"
+        android:text="See blogs"/>
+
+    <LinearLayout
+        android:id="@+id/hobbyLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navToBlog"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp">
+
+        <Spinner
+            android:id="@+id/hobbySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:entries="@array/hobbies"/>
+
+        <Button
+            android:id="@+id/submitHobby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:text="Submit"/>
+    </LinearLayout>
 </RelativeLayout>

@@ -58,7 +58,7 @@ public class BlogActivity extends AppCompatActivity {
         arrayList = new ArrayList<>(multiDBHelper.getNotes());
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        NotesAdapter adapter = new NotesAdapter(getApplicationContext(), this, arrayList);
+        NotesAdapter adapter = new NotesAdapter(getApplicationContext(), this, arrayList, username);
         recyclerView.setAdapter(adapter);
     }
 

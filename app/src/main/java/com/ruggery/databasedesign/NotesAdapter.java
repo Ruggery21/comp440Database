@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,10 +33,15 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
     private SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
     private String currentDate = sdf.format(new Date());
 
-    public NotesAdapter(Context context,Activity activity, ArrayList<NoteModel> arrayList) {
+    String currentUser;
+
+    public NotesAdapter(Context context,Activity activity, ArrayList<NoteModel> arrayList, String currentUser) {
         this.context = context;
         this.activity  = activity ;
         this.arrayList = arrayList;
+
+        this.currentUser = currentUser;
+
     }
 
     @Override
@@ -117,23 +123,32 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
         submit.setOnClickListener(new View.OnClickListener() {;
             @Override
             public void onClick(View v) {
-                if (title.getText().toString().isEmpty()) {
-                    title.setError("Please Enter Title");
-                }else if(des.getText().toString().isEmpty()) {
-                    des.setError("Please Enter Description");
-                }else if(tags.getText().toString().isEmpty()) {
+                int id_pos = pos + 1;
+                String id = String.valueOf(id_pos); //String.valueOf(pos); //valueOf(id_pos)
+                String name = multiDBHelper.getUsername(id);
+                if(currentUser.equals(name)) {
+                    if (title.getText().toString().isEmpty()) {
+                        title.setError("Please Enter Title");
+                    } else if (des.getText().toString().isEmpty()) {
+                        des.setError("Please Enter Description");
+                    } else if (tags.getText().toString().isEmpty()) {
                         tags.setError("Please Enter Tag(s)");
+                    } else {
+                        //updating note
+                        multiDBHelper.updateNote(title.getText().toString(), des.getText().toString(), currentDate, arrayList.get(pos).getID());
+                        multiDBHelper.updateTags(tags.getText().toString(), arrayList.get(pos).getID());
+                        arrayList.get(pos).setTitle(title.getText().toString());
+                        arrayList.get(pos).setDes(des.getText().toString());
+                        arrayList.get(pos).setTags(tags.getText().toString());
+                        dialog.cancel();
+                        //notify list
+                        notifyDataSetChanged();
+                    }
                 }
-                else {
-                    //updating note
-                    multiDBHelper.updateNote(title.getText().toString(), des.getText().toString(), currentDate, arrayList.get(pos).getID());
-                    multiDBHelper.updateTags(tags.getText().toString(), arrayList.get(pos).getID());
-                    arrayList.get(pos).setTitle(title.getText().toString());
-                    arrayList.get(pos).setDes(des.getText().toString());
-                    arrayList.get(pos).setTags(tags.getText().toString());
-                    dialog.cancel();
-                    //notify list
-                    notifyDataSetChanged();
+                else{
+                    Toast.makeText(context, "Current User does not match Creator of post.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Name from CurrentUser = " + currentUser, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Name from Database = " + name, Toast.LENGTH_SHORT).show();
                 }
             }
         });

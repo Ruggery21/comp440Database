@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                             if(insert == true){
                                 Toast.makeText(MainActivity.this, "Registration Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                                intent.putExtra("user_key", user);
                                 startActivity(intent);
                             }
                             else{
