@@ -55,24 +55,4 @@
             android:layout_marginStart="25dp"
             android:text="Submit"/>
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/testView"
-        android:layout_below="@+id/hobbyLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:textSize="30sp"/>
-
-    <Button
-        android:id="@+id/testButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/testView"
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
-        android:text="CLICK"/>
-
-
 </RelativeLayout>

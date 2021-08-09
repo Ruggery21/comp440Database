@@ -127,12 +127,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                 String id = String.valueOf(id_pos); //String.valueOf(pos); //valueOf(id_pos)
                 String name = multiDBHelper.getUsername(id);
                 if(currentUser.equals(name)) {
-                    //Toast.makeText(context, "DO NOT MATCH", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(context, id, Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(context, "Name from Database = " + name, Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(context, "Name from CurrentUser = " + currentUser, Toast.LENGTH_SHORT).show();
-
-
                     if (title.getText().toString().isEmpty()) {
                         title.setError("Please Enter Title");
                     } else if (des.getText().toString().isEmpty()) {

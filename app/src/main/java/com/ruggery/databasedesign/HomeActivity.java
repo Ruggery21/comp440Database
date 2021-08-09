@@ -22,8 +22,6 @@ public class HomeActivity extends AppCompatActivity{
 
     MultiDBHelper multiDB;
 
-    private TextView testView;
-    private Button testButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,19 +72,5 @@ public class HomeActivity extends AppCompatActivity{
                 Toast.makeText(HomeActivity.this, hobby, Toast.LENGTH_SHORT).show();
             }
         });
-
-     testView = findViewById(R.id.testView);
-     testButton = findViewById(R.id.testButton);
-
-     testButton.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View view) {
-             //String name = multiDB.getUsername();
-             //testView.setText(name);
-         }
-     });
-
-
-
     }
 }
