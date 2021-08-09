@@ -60,12 +60,22 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
         holder.delete.setOnClickListener(new View.OnClickListener() {;
             @Override
             public void onClick(View v) {
-                //deleting note
-                multiDBHelper.delete(arrayList.get(position).getID());
-                //deleting tag
-                multiDBHelper.deleteTags(arrayList.get(position).getID());
-                arrayList.remove(position);
-                notifyDataSetChanged();
+                int id_pos = position + 1;
+                String id = String.valueOf(id_pos); //String.valueOf(pos); //valueOf(id_pos)
+                String name = multiDBHelper.getUsername(id);
+                if(currentUser.equals(name)) {
+                    //deleting note
+                    multiDBHelper.delete(arrayList.get(position).getID());
+                    //deleting tag
+                    multiDBHelper.deleteTags(arrayList.get(position).getID());
+                    arrayList.remove(position);
+                    notifyDataSetChanged();
+                }
+                else{
+                    Toast.makeText(context, "Current User does not match Creator of post.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Name from CurrentUser = " + currentUser, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Name from Database = " + name, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
