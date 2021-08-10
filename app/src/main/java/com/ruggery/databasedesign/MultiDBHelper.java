@@ -29,9 +29,11 @@ public class MultiDBHelper extends SQLiteOpenHelper {
 
         multiDB.execSQL("create Table comments(comment_id INTEGER primary key, sentiment TEXT, description TEXT, cdate TEXT, blog_id INTEGER, posted_by TEXT)");
 
+        multiDB.execSQL("create Table follows(leadername TEXT primary key, followername TEXT)");
+
         multiDB.execSQL("create Table hobbies(hobby TEXT primary key, username TEXT)");
 
-        multiDB.execSQL("create Table follows(leadername TEXT primary key, followername TEXT)");
+        multiDB.execSQL("create Table users(username TEXT primary key, password TEXT, email TEXT)");
     }
 
     @Override
@@ -52,6 +54,16 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         else{
             return false;
         }
+    }
+
+    public void addUser(String username, String password, String email){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("password", password);
+        contentValues.put("email", email);
+        MyDB.insert("users", null, contentValues);
+
     }
 
     public void addNotes(String title, String des, String date, String creator) {
@@ -75,6 +87,21 @@ public class MultiDBHelper extends SQLiteOpenHelper {
 
         //inserting new row
         sqLiteDatabase.insert("blogstags", null , values);
+        //close database connection
+        sqLiteDatabase.close();
+    }
+
+    public void addComment(String senti, String des, String date, String id, String creator) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("sentiment", senti);
+        values.put("description", des);
+        values.put("cdate", date);
+        values.put("blog_id", id);
+        values.put("posted_by", creator);
+
+        //inserting new row
+        sqLiteDatabase.insert("comments", null , values);
         //close database connection
         sqLiteDatabase.close();
     }
