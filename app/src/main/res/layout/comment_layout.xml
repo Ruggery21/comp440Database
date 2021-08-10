@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="15dp"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/sentiment"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textAlignment="center"
+        android:entries="@array/sentiments"/>
+
+    <EditText
+        android:id="@+id/commentdDescription"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:drawable/dialog_holo_light_frame"
+        android:hint="Description"
+        android:gravity="start"
+        android:padding="15dp"/>
+
+    <Button
+        android:id="@+id/commentSubmit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/colorAccent"
+        android:text="Submit"
+        android:textColor="@color/white"/>
+
+</LinearLayout>
