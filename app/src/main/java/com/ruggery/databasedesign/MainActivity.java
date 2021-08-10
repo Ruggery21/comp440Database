@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private Button signUpButton, existUserButton;
 
     DBHelper DB;
+    MultiDBHelper multiDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         existUserButton = findViewById(R.id.existUserButton);
 
         DB = new DBHelper(this);
+        multiDBHelper = new MultiDBHelper(this);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                         Boolean checkemail = DB.checkuseremail(email);
                         if(checkuser == false && checkemail == false){
                             Boolean insert = DB.insertData(user, pass, fName, lName, email);
+                            multiDBHelper.addUser(user, pass, email);
                             if(insert == true){
                                 Toast.makeText(MainActivity.this, "Registration Successfully", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), HomeActivity.class);

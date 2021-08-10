@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +29,6 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
     Context context;
     Activity activity;
     ArrayList<NoteModel> arrayList;
-    //DatabaseHelper database_helper;
     MultiDBHelper multiDBHelper;
     private SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
     private String currentDate = sdf.format(new Date());
@@ -86,6 +86,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                 showDialog(position);
             }
         });
+
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showCommentDialog(position);
+            }
+        });
     }
 
     @Override
@@ -95,7 +102,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
 
     public class viewHolder extends RecyclerView.ViewHolder {
         TextView title, description, tags;
-        ImageView delete, edit;
+        ImageView delete, edit, comment;
         public viewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
@@ -103,6 +110,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
             tags = (TextView) itemView.findViewById(R.id.tags);
             delete = (ImageView) itemView.findViewById(R.id.delete);
             edit = (ImageView) itemView.findViewById(R.id.edit);
+
+            comment = (ImageView) itemView.findViewById(R.id.comment);
+
         }
     }
 
@@ -159,6 +169,54 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                     Toast.makeText(context, "Current User does not match Creator of post.", Toast.LENGTH_SHORT).show();
                     Toast.makeText(context, "Name from CurrentUser = " + currentUser, Toast.LENGTH_SHORT).show();
                     Toast.makeText(context, "Name from Database = " + name, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+
+
+    public void showCommentDialog(final int pos) {
+        final EditText commentDescription;
+        final Spinner sentiment;
+        Button commentSubmit;
+        final Dialog dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        dialog.setContentView(R.layout.comment_layout);
+        params.copyFrom(dialog.getWindow().getAttributes());
+        params.height = WindowManager.LayoutParams.MATCH_PARENT;
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.gravity = Gravity.CENTER;
+        dialog.getWindow().setAttributes(params);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+
+        commentDescription = (EditText) dialog.findViewById(R.id.commentdDescription);
+        commentSubmit = (Button) dialog.findViewById(R.id.commentSubmit);
+        sentiment = (Spinner) dialog.findViewById(R.id.sentiment);
+
+        commentSubmit.setOnClickListener(new View.OnClickListener() {;
+            @Override
+            public void onClick(View v) {
+                String senti = sentiment.getSelectedItem().toString();
+                int id_pos = pos + 1;
+                String id = String.valueOf(id_pos); //String.valueOf(pos); //valueOf(id_pos)
+                String name = multiDBHelper.getUsername(id);
+                if(!currentUser.equals(name)) {
+                    if (commentDescription.getText().toString().isEmpty()) {
+                        commentDescription.setError("Please Enter Description");
+                    }
+                    else {
+                        //updating note
+                        multiDBHelper.addComment(senti, commentDescription.getText().toString(), currentDate, id, currentUser);
+                        dialog.cancel();
+                        //notify list
+                        notifyDataSetChanged();
+                    }
+                }
+                else{
+                    Toast.makeText(context, "Current User cannot post self comment", Toast.LENGTH_SHORT).show();
                 }
             }
         });

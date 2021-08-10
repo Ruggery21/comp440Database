@@ -9,4 +9,9 @@
         <item>cooking</item>
         <item>dancing</item>
     </string-array>
+
+    <string-array name="sentiments">
+        <item>positive</item>
+        <item>negative</item>
+    </string-array>
 </resources>
