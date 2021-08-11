@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.nfc.Tag;
 import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.util.Log;
+import android.widget.SimpleCursorAdapter;
 
 import androidx.annotation.Nullable;
 
@@ -121,6 +122,29 @@ public class MultiDBHelper extends SQLiteOpenHelper {
 
         // select all query
         String select_query= "SELECT B.blog_id, B.subject, B.description, T.tag FROM blogs AS B, blogstags AS T WHERE B.blog_id = T.blog_id"; //"SELECT *FROM " + "blogs"
+
+        SQLiteDatabase db = this .getWritableDatabase();
+        Cursor cursor = db.rawQuery(select_query, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                NoteModel noteModel = new NoteModel();
+                noteModel.setID(cursor.getString(0));
+                noteModel.setTitle(cursor.getString(1));
+                noteModel.setDes(cursor.getString(2));
+                noteModel.setTags(cursor.getString(3));
+                arrayList.add(noteModel);
+            }while (cursor.moveToNext());
+        }
+        return arrayList;
+    }
+
+    public ArrayList<NoteModel> getComments(String position) {
+        ArrayList<NoteModel> arrayList = new ArrayList<>();
+
+        // select all query
+        String select_query= "SELECT comment_id, sentiment, description, posted_by FROM comments WHERE blog_id =" + position;
 
         SQLiteDatabase db = this .getWritableDatabase();
         Cursor cursor = db.rawQuery(select_query, null);

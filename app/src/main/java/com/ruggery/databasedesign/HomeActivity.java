@@ -20,6 +20,8 @@ public class HomeActivity extends AppCompatActivity{
     private Spinner hobbySpinner;
     private Button submitHobby;
 
+    private Button navToComment;
+
     MultiDBHelper multiDB;
 
 
@@ -39,6 +41,8 @@ public class HomeActivity extends AppCompatActivity{
 
         hobbySpinner = findViewById(R.id.hobbySpinner);
         submitHobby = findViewById(R.id.submitHobby);
+
+        navToComment = findViewById(R.id.navToComment);
 
         //Database this here
         multiDB = new MultiDBHelper(this);
@@ -61,6 +65,14 @@ public class HomeActivity extends AppCompatActivity{
                 Intent blogIntent = new Intent(getApplicationContext(), BlogActivity.class);
                 blogIntent.putExtra("user_key", user);
                 startActivity(blogIntent);
+            }
+        });
+
+        navToComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, CommentActivity.class);
+                startActivity(intent);
             }
         });
 
