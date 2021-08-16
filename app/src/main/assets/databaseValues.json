@@ -1,0 +1,398 @@
+{
+  "users": [
+    {
+      "username": "batman",
+      "password": "1234",
+      "email": "nananana@batman.com"
+    },
+    {
+      "username": "bob",
+      "password": "12345",
+      "email": "bobthatsme@yahoo.com"
+    },
+    {
+      "username": "catlover",
+      "password": "abcd",
+      "email": "catlover@whiskers.com"
+    },
+    {
+      "username": "doglover",
+      "password": "efds",
+      "email": "doglover@bark.net"
+    },
+    {
+      "username": "jdoe",
+      "password": "25478",
+      "email": "jane@doe.com"
+    },
+    {
+      "username": "jsmith",
+      "password": "1111",
+      "email": "jsmith@gmail.com"
+    },
+    {
+      "username": "matty",
+      "password": "2222",
+      "email": "matty@csun.edu"
+    },
+    {
+      "username": "notbob",
+      "password": "5555",
+      "email": "stopcallingmebob@yahoo.com"
+    },
+    {
+      "username": "pacman",
+      "password": "9999",
+      "email": "pacman@gmail.com"
+    },
+    {
+      "username": "scooby",
+      "password": "8888",
+      "email": "scooby@doo.net"
+    }
+  ],
+  "hobbies": [
+    {
+      "username": "batman",
+      "hobby": "movie"
+    },
+    {
+      "username": "bob",
+      "hobby": "movie"
+    },
+    {
+      "username": "catlover",
+      "hobby": "movie"
+    },
+    {
+      "username": "doglover",
+      "hobby": "hiking"
+    },
+    {
+      "username": "jdoe",
+      "hobby": "dancing"
+    },
+    {
+      "username": "jdoe",
+      "hobby": "movie"
+    },
+    {
+      "username": "jsmith",
+      "hobby": "hiking"
+    },
+    {
+      "username": "matty",
+      "hobby": "bowling"
+    },
+    {
+      "username": "notbob",
+      "hobby": "calligraphy"
+    },
+    {
+      "username": "pacman",
+      "hobby": "dancing"
+    },
+    {
+      "username": "pacman",
+      "hobby": "movie"
+    },
+    {
+      "username": "scooby",
+      "hobby": "cooking"
+    }
+  ],
+  "follows": [
+    {
+      "leadername": "jsmith",
+      "followername": "bob"
+    },
+    {
+      "leadername": "batman",
+      "followername": "catlover"
+    },
+    {
+      "leadername": "doglover",
+      "followername": "catlover"
+    },
+    {
+      "leadername": "catlover",
+      "followername": "doglover"
+    },
+    {
+      "leadername": "jsmith",
+      "followername": "jdoe"
+    },
+    {
+      "leadername": "pacman",
+      "followername": "matty"
+    },
+    {
+      "leadername": "bob",
+      "followername": "notbob"
+    },
+    {
+      "leadername": "jdoe",
+      "followername": "notbob"
+    },
+    {
+      "leadername": "batman",
+      "followername": "pacman"
+    },
+    {
+      "leadername": "scooby",
+      "followername": "pacman"
+    },
+    {
+      "leadername": "doglover",
+      "followername": "scooby"
+    },
+    {
+      "leadername": "pacman",
+      "followername": "scooby"
+    }
+  ],
+  "blogs": [
+    {
+      "subject": "Hello World",
+      "description": "Hey everyone, this is my first blog. Hello world and all who inhabit it!",
+      "pdate": "2020-03-15",
+      "created_by": "jsmith"
+    },
+    {
+      "subject": "I love cats!",
+      "description": "Catsare amazing. They're awesome, and fuzzy, and cute. Who DOESN'T love cats?",
+      "pdate": "2020-03-17",
+      "created_by": "catlover"
+    },
+    {
+      "subject": "Dogs are the best.",
+      "description": "So I saw a post the other day talking about cats. Now, I love cats. They're great. But here's the thing: dogs are just the best, okay? There's no question about it. That is all.",
+      "pdate": "2020-03-19",
+      "created_by": "doglover"
+    },
+    {
+      "subject": "I am the night.",
+      "description": "To all you lowly criminals out there, this isa warning to know I am watching. I am justice. I am righteousness. I am the NIGHT.",
+      "pdate": "2020-03-24",
+      "created_by": "batman"
+    },
+    {
+      "subject": "Waka waka",
+      "description": "waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka waka",
+      "pdate": "2020-03-31",
+      "created_by": "pacman"
+    },
+    {
+      "subject": "Who is this Bob guy?",
+      "description": "Decided to start tracking down this mysterious human known as \\'Bob.\\' Who is Bob? What does he do? WHY does he do it? There is a lot of mystery surrounding this person, and I will be going into detail in future posts. Stay tuned!",
+      "pdate": "2020-04-02",
+      "created_by": "notbob"
+    },
+    {
+      "subject": "Re: I love cats.",
+      "description": "A reader recently reached out to me about my last post. To be clear, I'm not dissing our canine companions! But we've got to be honest here, why are cats better? They're smart, affectionate, and great cuddle partners. Cats are better. It's just fact.",
+      "pdate": "2020-04-04",
+      "created_by": "catlover"
+    },
+    {
+      "subject": "Scooby Dooby Doo!",
+      "description": "The search for scooby snacks: Where did they go? I know this whole quarantine thing is affecting businesses, but aren't scooby snacks counted as an essential service? Please post below if you find anything! I'm going crazy here!",
+      "pdate": "2020-04-05",
+      "created_by": "scooby"
+    },
+    {
+      "subject": "Bob Update",
+      "description": "Dear readers, I know you have been waiting anxiously for an update on Bob, but there is not much to share so far. He appears to have little to no online presence. Just a clarification: I am decidedly NOT Bob. Thanks all. Stay tuned for more!",
+      "pdate": "2020-04-06",
+      "created_by": "notbob"
+    },
+    {
+      "subject": "Lizard People.",
+      "description": "What are your guys' thoughts on them? I, for one, welcome out reptitlian overlords.",
+      "pdate": "2020-04-12",
+      "created_by": "jdoe"
+    }
+  ],
+  "blogstags": [
+    {
+      "blog_id": "1",
+      "tag": "hello world"
+    },
+    {
+      "blog_id": "2",
+      "tag": "animal"
+    },
+    {
+      "blog_id": "2",
+      "tag": "cats"
+    },
+    {
+      "blog_id": "3",
+      "tag": "animals"
+    },
+    {
+      "blog_id": "3",
+      "tag": "dogs"
+    },
+    {
+      "blog_id": "4",
+      "tag": "crime"
+    },
+    {
+      "blog_id": "4",
+      "tag": "justice"
+    },
+    {
+      "blog_id": "5",
+      "tag": "cartoon"
+    },
+    {
+      "blog_id": "5",
+      "tag": "waka"
+    },
+    {
+      "blog_id": "6",
+      "tag": "bob"
+    },
+    {
+      "blog_id": "6",
+      "tag": "update"
+    },
+    {
+      "blog_id": "7",
+      "tag": "cats"
+    },
+    {
+      "blog_id": "7",
+      "tag": "dogs"
+    },
+    {
+      "blog_id": "8",
+      "tag": "dogs"
+    },
+    {
+      "blog_id": "8",
+      "tag": "quarantine"
+    },
+    {
+      "blog_id": "8",
+      "tag": "scoobysnacks"
+    },
+    {
+      "blog_id": "9",
+      "tag": "bob"
+    },
+    {
+      "blog_id": "9",
+      "tag": "update"
+    },
+    {
+      "blog_id": "10",
+      "tag": "lizard"
+    }
+  ],
+  "displaytags": [
+    {
+      "tag": "hello world"
+    },
+    {
+      "tag": "animal, cats"
+    },
+    {
+      "tag": "animals, dog"
+    },
+    {
+      "tag": "crime, justice"
+    },
+    {
+      "tag": "cartoon, waka"
+    },
+    {
+      "tag": "bob, update"
+    },
+    {
+      "tag": "cats, dogs"
+    },
+    {
+      "tag": "dogs, quarantine, scoobysnacks"
+    },
+    {
+      "tag": "bob, update"
+    },
+    {
+      "tag": "lizard"
+    }
+  ],
+  "comments": [
+    {
+      "sentiment": "negative",
+      "description": "Cats are cool and all, but dogs are where it's at.",
+      "cdate": "2020-03-17",
+      "blog_id": "2",
+      "posted_by": "doglover"
+    },
+    {
+      "sentiment": "negative",
+      "description": "What's all the hype about? Cats are clearly superior.",
+      "cdate": "2020-03-20",
+      "blog_id": "3",
+      "posted_by": "catlover"
+    },
+    {
+      "sentiment": "positive",
+      "description": "Nice.",
+      "cdate": "2020-03-20",
+      "blog_id": "4",
+      "posted_by": "scooby"
+    },
+    {
+      "sentiment": "positive",
+      "description": "Who IS Bob? I can't wait to find out.",
+      "cdate": "2020-04-02",
+      "blog_id": "6",
+      "posted_by": "jsmith"
+    },
+    {
+      "sentiment": "negative",
+      "description": "I guess cat people just don't know what they're missing.",
+      "cdate": "2020-04-05",
+      "blog_id": "7",
+      "posted_by": "doglover"
+    },
+    {
+      "sentiment": "positive",
+      "description": "This is totally unrelated, but I just wanted to say I am a HUGE fan of yours. I love your work!",
+      "cdate": "2020-04-050",
+      "blog_id": "8",
+      "posted_by": "doglover"
+    },
+    {
+      "sentiment": "positive",
+      "description": "Have you checked out Dog-Mart? They've got everything.",
+      "cdate": "2020-04-06",
+      "blog_id": "8",
+      "posted_by": "matty"
+    },
+    {
+      "sentiment": "negative",
+      "description": "I was hoping there'd be more of an update. Sorry, Bob.",
+      "cdate": "2020-04-07",
+      "blog_id": "9",
+      "posted_by": "jsmith"
+    },
+    {
+      "sentiment": "positive",
+      "description": "I think they\\'re all secretly cats. Open your eyes, sheeple!",
+      "cdate": "2020-04-13",
+      "blog_id": "10",
+      "posted_by": "doglover"
+    },
+    {
+      "sentiment": "negative",
+      "description": "Who? Me? Multimillionaire philanthropist of Arkham? A lizard person? Nope. Nothing to see here!",
+      "cdate": "2020-04-15",
+      "blog_id": "10",
+      "posted_by": "batman"
+    }
+  ]
+}
