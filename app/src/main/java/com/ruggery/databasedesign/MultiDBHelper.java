@@ -24,23 +24,49 @@ public class MultiDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase multiDB) {
-        multiDB.execSQL("create Table blogs(blog_id INTEGER primary key, subject TEXT, description TEXT, pdate TEXT, created_by TEXT)");
+        multiDB.execSQL("create Table blogs(blog_id INTEGER primary key, " +
+                "subject TEXT, " +
+                "description TEXT, " +
+                "pdate TEXT, " +
+                "created_by TEXT, " +
+                "FOREIGN KEY (created_by) REFERENCES users (username))");
 
-        multiDB.execSQL("create Table blogstags(blog_id INTEGER primary key, tag TEXT)");
+        multiDB.execSQL("create Table displaytags(blog_id INTEGER primary key, tag TEXT)");
 
-        multiDB.execSQL("create Table comments(comment_id INTEGER primary key, sentiment TEXT, description TEXT, cdate TEXT, blog_id INTEGER, posted_by TEXT)");
+        multiDB.execSQL("create Table blogstags(blog_id INTEGER, " +
+                "tag TEXT, " +
+                "PRIMARY KEY(blog_id, tag), " +
+                "FOREIGN KEY (blog_id) REFERENCES blogs (blog_id))");
 
-        multiDB.execSQL("create Table follows(leadername TEXT primary key, followername TEXT)");
+        multiDB.execSQL("create Table comments(comment_id INTEGER primary key AUTOINCREMENT, " +
+                "sentiment TEXT, description TEXT, cdate TEXT, " +
+                "blog_id INTEGER, posted_by TEXT, " +
+                "FOREIGN KEY (blog_id) REFERENCES blogs (blog_id), " +
+                "FOREIGN KEY (posted_by) REFERENCES users (username), " +
+                "CONSTRAINT sentiment_types CHECK((sentiment in ('negative','positive'))))");
 
-        multiDB.execSQL("create Table hobbies(hobby TEXT primary key, username TEXT)");
+        multiDB.execSQL("create Table follows(leadername TEXT, " +
+                "followername TEXT, " +
+                "PRIMARY KEY (leadername, followername), " +
+                "FOREIGN KEY (leadername) REFERENCES users (username), " +
+                "FOREIGN KEY (followername) REFERENCES users (username))");
 
-        multiDB.execSQL("create Table users(username TEXT primary key, password TEXT, email TEXT)");
+        multiDB.execSQL("create Table hobbies(username TEXT, " +
+                "hobby TEXT, " +
+                "PRIMARY KEY(username, hobby), " +
+                "FOREIGN KEY(username) REFERENCES users (username), " +
+                "CONSTRAINT hobby_types CHECK((hobby in('hiking','swimming','calligraphy','bowling','movie','cooking','dancing'))))");
+
+        multiDB.execSQL("create Table users(username TEXT, " +
+                "password TEXT, " +
+                "email TEXT, " +
+                "PRIMARY KEY(username))");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase multiDB, int i, int i1) {
         multiDB.execSQL("DROP TABLE IF EXISTS blogs");
-        multiDB.execSQL("DROP TABLE IF EXISTS blogstags");
+        multiDB.execSQL("DROP TABLE IF EXISTS displaytags");
         multiDB.execSQL("DROP TABLE IF EXISTS comments");
         multiDB.execSQL("DROP TABLE IF EXISTS hobbies");
         multiDB.execSQL("DROP TABLE IF EXISTS follows");
@@ -87,7 +113,7 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         values.put("tag", tags);
 
         //inserting new row
-        sqLiteDatabase.insert("blogstags", null , values);
+        sqLiteDatabase.insert("displaytags", null , values);
         //close database connection
         sqLiteDatabase.close();
     }
@@ -121,7 +147,7 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         ArrayList<NoteModel> arrayList = new ArrayList<>();
 
         // select all query
-        String select_query= "SELECT B.blog_id, B.subject, B.description, T.tag FROM blogs AS B, blogstags AS T WHERE B.blog_id = T.blog_id"; //"SELECT *FROM " + "blogs"
+        String select_query= "SELECT B.blog_id, B.subject, B.description, T.tag FROM blogs AS B, displaytags AS T WHERE B.blog_id = T.blog_id"; //"SELECT *FROM " + "blogs"
 
         SQLiteDatabase db = this .getWritableDatabase();
         Cursor cursor = db.rawQuery(select_query, null);
@@ -173,7 +199,7 @@ public class MultiDBHelper extends SQLiteOpenHelper {
     public void deleteTags(String ID) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         //deleting row
-        sqLiteDatabase.delete("blogstags", "blog_id=" + ID, null); //made a change here
+        sqLiteDatabase.delete("displaytags", "blog_id=" + ID, null); //made a change here
         sqLiteDatabase.close();
     }
 
@@ -195,7 +221,7 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         values.put("tag", tags);
 
         //updating row
-        sqLiteDatabase.update("blogstags", values, "blog_id=" + ID, null);
+        sqLiteDatabase.update("displaytags", values, "blog_id=" + ID, null);
         sqLiteDatabase.close();
     }
 
