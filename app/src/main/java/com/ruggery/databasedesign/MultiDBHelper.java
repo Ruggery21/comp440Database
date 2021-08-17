@@ -72,17 +72,6 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         multiDB.execSQL("DROP TABLE IF EXISTS follows");
     }
 
-    public boolean initialize(String initial){
-        SQLiteDatabase multiDB = this.getWritableDatabase();
-        Cursor cursor = multiDB.rawQuery("Select * from blogs where subject = ?", new String[]{initial});
-        if(cursor.getCount() > 0){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
     public void addUser(String username, String password, String email){
         SQLiteDatabase MyDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -103,6 +92,18 @@ public class MultiDBHelper extends SQLiteOpenHelper {
 
         //inserting new row
         sqLiteDatabase.insert("blogs", null , values);
+        //close database connection
+        sqLiteDatabase.close();
+    }
+
+    public void addBTags(String id, String tags) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("blog_id", id);
+        values.put("tag", tags);
+
+        //inserting new row
+        sqLiteDatabase.insert("blogstags", null , values);
         //close database connection
         sqLiteDatabase.close();
     }
@@ -140,6 +141,16 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         values.put("username", user);
 
         sqLiteDatabase.insert("hobbies", null, values);
+        sqLiteDatabase.close();
+    }
+
+    public void addFollower(String leader, String follower){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("leadername", leader);
+        values.put("followername", follower);
+
+        sqLiteDatabase.insert("follows", null, values);
         sqLiteDatabase.close();
     }
 

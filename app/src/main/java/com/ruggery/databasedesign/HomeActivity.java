@@ -57,9 +57,7 @@ public class HomeActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        //Gets username from login page
         String user = getIntent().getStringExtra("user_key");
-        //Displays what user is logged in
         userView = findViewById(R.id.userView);
         userView.setText(user);
 
@@ -71,7 +69,6 @@ public class HomeActivity extends AppCompatActivity{
 
         navToComment = findViewById(R.id.navToComment);
 
-        //Database this here
         multiDB = new MultiDBHelper(this);
 
         initializeButton.setOnClickListener(new View.OnClickListener() {
@@ -83,18 +80,12 @@ public class HomeActivity extends AppCompatActivity{
                     initiateUsers(jsonUser);
                     JSONArray jsonHobby = jsonObject.getJSONArray("hobbies");
                     initiateHobbies(jsonHobby);
-
-                    //JSONArray jsonFollow = jsonObject.getJSONArray("follows");
-                    //initiateFollows(jsonFollow);
-
+                    JSONArray jsonFollow = jsonObject.getJSONArray("follows");
+                    initiateFollows(jsonFollow);
                     JSONArray jsonBlog = jsonObject.getJSONArray("blogs");
                     initiateBlogs(jsonBlog);
-
-                    //JSONArray jsonBT = jsonObject.getJSONArray("blogstags");
-                    //initiateBlogTags(jsonBT);
-
-                    //Create function to add a follower, create function for blogstags, start the production for phase 3
-
+                    JSONArray jsonBT = jsonObject.getJSONArray("blogstags");
+                    initiateBlogTags(jsonBT);
                     JSONArray jsonDT = jsonObject.getJSONArray("displaytags");
                     initiateDisplayTags(jsonDT);
                     JSONArray jsonCom = jsonObject.getJSONArray("comments");
@@ -184,16 +175,16 @@ public class HomeActivity extends AppCompatActivity{
         }
     }
 
-    private void initiateFollows(JSONArray jsonHobby){
+    private void initiateFollows(JSONArray jsonFollow){
         try {
             String fol[] = new String[2];
-            for(int i = 0; i < jsonHobby.length(); i++){
-                JSONObject userData = jsonHobby.getJSONObject(i);
+            for(int i = 0; i < jsonFollow.length(); i++){
+                JSONObject userData = jsonFollow.getJSONObject(i);
                 leader.add(userData.getString("leadername"));
                 follower.add(userData.getString("followername"));
                 fol[0] = leader.get(i);
                 fol[1] = follower.get(i);
-                multiDB.addHobby(fol[0], fol[1]);
+                multiDB.addFollower(fol[0], fol[1]);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -229,7 +220,7 @@ public class HomeActivity extends AppCompatActivity{
                 tag.add(userData.getString("tag"));
                 bt[0] = id.get(i);
                 bt[1] = tag.get(i);
-                //multiDB.add(bt[0], bt[1]);
+                multiDB.addBTags(bt[0], bt[1]);
             }
         } catch (JSONException e) {
             e.printStackTrace();
