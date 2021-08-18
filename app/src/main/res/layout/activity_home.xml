@@ -26,7 +26,7 @@
 
     <Button
         android:id="@+id/navToBlog"
-        android:layout_width="wrap_content"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/initializeButton"
         android:layout_marginTop="35dp"
@@ -35,18 +35,27 @@
 
     <Button
         android:id="@+id/navToComment"
-        android:layout_width="wrap_content"
+        android:layout_width="165dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/navToBlog"
         android:layout_marginTop="35dp"
         android:layout_centerInParent="true"
         android:text="See Comments"/>
 
+    <Button
+        android:id="@+id/query"
+        android:layout_width="165dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/navToComment"
+        android:layout_marginTop="35dp"
+        android:layout_centerInParent="true"
+        android:text="Query"/>
+
     <LinearLayout
         android:id="@+id/hobbyLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/navToComment"
+        android:layout_below="@+id/query"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp">
 

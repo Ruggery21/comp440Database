@@ -29,6 +29,7 @@ public class HomeActivity extends AppCompatActivity{
     private Button submitHobby;
 
     private Button navToComment;
+    private Button query;
 
     MultiDBHelper multiDB;
 
@@ -68,6 +69,7 @@ public class HomeActivity extends AppCompatActivity{
         submitHobby = findViewById(R.id.submitHobby);
 
         navToComment = findViewById(R.id.navToComment);
+        query = findViewById(R.id.query);
 
         multiDB = new MultiDBHelper(this);
 
@@ -111,6 +113,14 @@ public class HomeActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, CommentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        query.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeActivity.this, QueryActivity.class);
                 startActivity(intent);
             }
         });
