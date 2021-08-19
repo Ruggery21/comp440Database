@@ -249,4 +249,77 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public String posBlog(String user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT DISTINCT subject FROM blogs AS B, comments AS C WHERE B.created_by = '" + user + "' " +
+                "AND B.blog_id = (SELECT C.blog_id FROM comments WHERE C.sentiment = 'positive')", null);
+        StringBuilder result = new StringBuilder("");
+        if(cursor.moveToFirst()){
+            do {
+                result.append(cursor.getString(0) + "\n");
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return String.valueOf(result);
+    }
+
+    public String mostBlogs(String date){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT created_by, count(*) as blog_count FROM blogs " +
+                "WHERE pdate = '" + date + "' group by created_by " +
+                "HAVING blog_count = (SELECT max(c) FROM (SELECT created_by, count(*) AS C FROM blogs " +
+                "WHERE pdate = '" + date + "' group by created_by) AS T)", null);
+        StringBuilder result = new StringBuilder("");
+        if(cursor.moveToFirst()){
+            do {
+                result.append(cursor.getString(0) + " count: ");
+                result.append(cursor.getString(1) + "\n");
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return String.valueOf(result);
+    }
+
+    public String followBy(String x, String y){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT F1.leadername FROM follows AS F1, follows AS F2 WHERE F1.leadername = F2.leadername " +
+                "AND F1.followername = '" + x +"' " +
+                "AND F2.followername = '" + y + "'", null);
+        StringBuilder result = new StringBuilder("");
+        if(cursor.moveToFirst()){
+            do {
+                result.append(cursor.getString(0) + "\n");
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return String.valueOf(result);
+    }
+
+    public String tagBlogs(String tag){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT subject FROM blogstags AS B, blogs AS C " +
+                "WHERE tag = '" + tag +"' " +
+                "AND B.blog_id = (SELECT C.blog_id FROM blogs)", null);
+        StringBuilder result = new StringBuilder("");
+        if(cursor.moveToFirst()){
+            do {
+                result.append(cursor.getString(0) + "\n");
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return String.valueOf(result);
+    }
+
+    public String neverPosted(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT username FROM users EXCEPT SELECT posted_by FROM comments", null);
+        StringBuilder result = new StringBuilder("");
+        if(cursor.moveToFirst()){
+            do {
+                result.append(cursor.getString(0) + "\n");
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return String.valueOf(result);
+    }
 }

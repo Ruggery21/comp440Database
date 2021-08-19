@@ -28,7 +28,7 @@ public class BlogActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     FloatingActionButton actionButton;
     MultiDBHelper multiDBHelper;
-    private SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private String currentDate = sdf.format(new Date());
     private String username;
 

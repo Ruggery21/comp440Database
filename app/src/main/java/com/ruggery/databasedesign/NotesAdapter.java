@@ -30,7 +30,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
     Activity activity;
     ArrayList<NoteModel> arrayList;
     MultiDBHelper multiDBHelper;
-    private SimpleDateFormat sdf = new SimpleDateFormat("MM.dd.yyyy");
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private String currentDate = sdf.format(new Date());
 
     String currentUser;
