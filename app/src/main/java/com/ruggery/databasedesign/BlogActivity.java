@@ -10,6 +10,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class BlogActivity extends AppCompatActivity {
@@ -31,6 +34,8 @@ public class BlogActivity extends AppCompatActivity {
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     private String currentDate = sdf.format(new Date());
     private String username;
+    DateUtil Today = new DateUtil();
+    private int clickCount = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +98,16 @@ public class BlogActivity extends AppCompatActivity {
                 }else if(tags.getText().toString().isEmpty()) {
                         tags.setError("Please Enter a tag(s)");
                 }else {
-                    multiDBHelper.addNotes(title.getText().toString(), des.getText().toString(), currentDate, username);
-                    multiDBHelper.addTags(tags.getText().toString());
-                    dialog.cancel();
-                    displayNotes();
+                    if((Today.isToday(Calendar.getInstance())) && clickCount <=2) {
+                        multiDBHelper.addNotes(title.getText().toString(), des.getText().toString(), currentDate, username);
+                        multiDBHelper.addTags(tags.getText().toString());
+                        dialog.cancel();
+                        displayNotes();
+                        clickCount++;
+                    }
+                    else{
+                        Toast.makeText(BlogActivity.this, "Reached limit of 2 posts/day", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

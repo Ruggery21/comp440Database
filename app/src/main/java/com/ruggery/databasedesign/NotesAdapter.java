@@ -35,6 +35,8 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
 
     String currentUser;
 
+    private int commentCounter = 0;
+
     public NotesAdapter(Context context,Activity activity, ArrayList<NoteModel> arrayList, String currentUser) {
         this.context = context;
         this.activity  = activity ;
@@ -203,7 +205,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                 int id_pos = pos + 1;
                 String id = String.valueOf(id_pos); //String.valueOf(pos); //valueOf(id_pos)
                 String name = multiDBHelper.getUsername(id);
-                if(!currentUser.equals(name)) {
+                if(!currentUser.equals(name) && commentCounter<1) {
                     if (commentDescription.getText().toString().isEmpty()) {
                         commentDescription.setError("Please Enter Description");
                     }
@@ -213,6 +215,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                         dialog.cancel();
                         //notify list
                         notifyDataSetChanged();
+                        commentCounter++;
                     }
                 }
                 else{
