@@ -21,10 +21,13 @@ public class CommentActivity extends AppCompatActivity {
     ArrayList<NoteModel> array;
     CommentAdapter commentAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+
+        String user = getIntent().getStringExtra("user_key");
 
         multiDBHelper = new MultiDBHelper(this);
         
@@ -38,6 +41,7 @@ public class CommentActivity extends AppCompatActivity {
                 String pos = String.valueOf(j);
                 Intent intent = new Intent(CommentActivity.this, DisplayCommentActivity.class);
                 intent.putExtra("pos_key", pos);
+                intent.putExtra("user_key", user);
                 startActivity(intent);
             }
         });
