@@ -214,6 +214,12 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
+    public void deleteComment(String ID){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.delete("comments", "comment_id=" + ID, null); //made a change here
+        sqLiteDatabase.close();
+    }
+
     public void updateNote(String title, String des, String date, String ID) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values =  new ContentValues();
@@ -236,9 +242,36 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
+    public void updateComment(String senti, String des, String date, String ID){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values =  new ContentValues();
+
+        values.put("sentiment", senti);
+        values.put("description", des);
+        values.put("cdate", date);
+
+        //updating row
+        sqLiteDatabase.update("comments", values, "comment_id=" + ID, null);
+        sqLiteDatabase.close();
+
+    }
+
     public String getUsername(String id){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT created_by FROM blogs WHERE blog_id = " + id, null);
+        String data = "";
+        if(cursor.moveToFirst()){
+            do{
+                data = cursor.getString(0);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return data;
+    }
+
+    public String retrieveComment(String id, String user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT comment_id FROM comments WHERE blog_id = '" + id + "' AND posted_by = '" + user + "'", null);
         String data = "";
         if(cursor.moveToFirst()){
             do{

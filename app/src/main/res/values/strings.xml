@@ -14,4 +14,10 @@
         <item>positive</item>
         <item>negative</item>
     </string-array>
+
+    <string-array name="update">
+        <item>positive</item>
+        <item>negative</item>
+        <item>delete</item>
+    </string-array>
 </resources>

@@ -66,9 +66,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                 String id = String.valueOf(id_pos); //String.valueOf(pos); //valueOf(id_pos)
                 String name = multiDBHelper.getUsername(id);
                 if(currentUser.equals(name)) {
-                    //deleting note
                     multiDBHelper.delete(arrayList.get(position).getID());
-                    //deleting tag
                     multiDBHelper.deleteTags(arrayList.get(position).getID());
                     arrayList.remove(position);
                     notifyDataSetChanged();
