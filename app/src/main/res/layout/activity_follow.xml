@@ -43,16 +43,6 @@
             android:layout_below="@id/searchUser"
             />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/userFound"
-            android:hint="Username"
-            android:layout_below="@id/followBtn"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
-            android:textSize="20dp"
-            />
 
     </RelativeLayout>
 </RelativeLayout>

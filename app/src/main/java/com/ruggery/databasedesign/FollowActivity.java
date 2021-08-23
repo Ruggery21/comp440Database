@@ -10,13 +10,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class FollowActivity extends AppCompatActivity {
 
-    DBHelper DB;
+//    DBHelper DB;
     MultiDBHelper multiDBHelper;
     private EditText searchUser;
     private Button followBtn;
-    private TextView userFound;
+    ArrayList<NoteModel> array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,24 +27,22 @@ public class FollowActivity extends AppCompatActivity {
 
         searchUser = (EditText) findViewById(R.id.searchUser);
         followBtn = (Button) findViewById(R.id.followBtn);
-        userFound = (TextView) findViewById(R.id.userFound);
 
-        DB = new DBHelper(this);
+        array = new ArrayList<>();
+
         multiDBHelper = new MultiDBHelper(this);
-        initiate();
-
-        String user = getIntent().getStringExtra("user_key");
+//        initiate();
 
         followBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String leader = searchUser.getText().toString();
-                String result = multiDBHelper.getUsername(leader);
+//                String result = multiDBHelper.getUsername(leader);
 
                 String user = getIntent().getStringExtra("user_key");
-                userFound.setText(result);
+//                userFound.setText(leader);
 
-                Boolean checkuser = DB.checkusername(result);
+                Boolean checkuser = multiDBHelper.checkusername(leader);
 
                 if(checkuser){
                     multiDBHelper.addFollower(leader, user);
@@ -54,9 +54,9 @@ public class FollowActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void initiate() {
-        userFound = findViewById(R.id.userFound);
-    }
+//
+//    private void initiate() {
+//        userFound = findViewById(R.id.userFound);
+//    }
 
 }

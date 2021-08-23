@@ -133,6 +133,7 @@ public class HomeActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, FollowActivity.class);
+                intent.putExtra("user_key", user);
                 startActivity(intent);
             }
         });
