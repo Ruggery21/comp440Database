@@ -39,6 +39,7 @@
             android:id="@+id/followBtn"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
+            android:text="Follow"
             android:layout_below="@id/searchUser"
             />
 

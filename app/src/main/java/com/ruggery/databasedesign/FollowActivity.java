@@ -25,7 +25,9 @@ public class FollowActivity extends AppCompatActivity {
 
         searchUser = (EditText) findViewById(R.id.searchUser);
         followBtn = (Button) findViewById(R.id.followBtn);
+        userFound = (TextView) findViewById(R.id.userFound);
 
+        DB = new DBHelper(this);
         multiDBHelper = new MultiDBHelper(this);
         initiate();
 
@@ -35,7 +37,9 @@ public class FollowActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String leader = searchUser.getText().toString();
-                String result = multiDBHelper.posBlog(leader);
+                String result = multiDBHelper.getUsername(leader);
+
+                String user = getIntent().getStringExtra("user_key");
                 userFound.setText(result);
 
                 Boolean checkuser = DB.checkusername(result);
