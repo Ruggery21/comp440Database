@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class FollowActivity extends AppCompatActivity {
 
+    DBHelper DB;
     MultiDBHelper multiDBHelper;
     private EditText searchUser;
     private Button followBtn;
@@ -22,7 +23,8 @@ public class FollowActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_follow);
 
-//        mTextView = (TextView) findViewById(R.id.text);
+        searchUser = (EditText) findViewById(R.id.searchUser);
+        followBtn = (Button) findViewById(R.id.followBtn);
 
         multiDBHelper = new MultiDBHelper(this);
         initiate();
@@ -36,9 +38,14 @@ public class FollowActivity extends AppCompatActivity {
                 String result = multiDBHelper.posBlog(leader);
                 userFound.setText(result);
 
-                if(result != null){
+                Boolean checkuser = DB.checkusername(result);
+
+                if(checkuser){
                     multiDBHelper.addFollower(leader, user);
                     Toast.makeText(FollowActivity.this, "You have now followed " + leader, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(FollowActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -47,4 +54,5 @@ public class FollowActivity extends AppCompatActivity {
     private void initiate() {
         userFound = findViewById(R.id.userFound);
     }
+
 }
