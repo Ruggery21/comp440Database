@@ -68,6 +68,7 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                 if(currentUser.equals(name)) {
                     multiDBHelper.delete(arrayList.get(position).getID());
                     multiDBHelper.deleteTags(arrayList.get(position).getID());
+                    multiDBHelper.deleteBTags(arrayList.get(position).getID());
                     arrayList.remove(position);
                     notifyDataSetChanged();
                 }
@@ -155,8 +156,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                         tags.setError("Please Enter Tag(s)");
                     } else {
                         //updating note
+                        multiDBHelper.deleteBTags(arrayList.get(pos).getID());
+
                         multiDBHelper.updateNote(title.getText().toString(), des.getText().toString(), currentDate, arrayList.get(pos).getID());
                         multiDBHelper.updateTags(tags.getText().toString(), arrayList.get(pos).getID());
+
+                        String blog_id = multiDBHelper.retrieveBlogID(currentUser, title.getText().toString());
+                        Blogtags(blog_id,tags.getText().toString());
+
                         arrayList.get(pos).setTitle(title.getText().toString());
                         arrayList.get(pos).setDes(des.getText().toString());
                         arrayList.get(pos).setTags(tags.getText().toString());
@@ -221,5 +228,13 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.viewHolder> 
                 }
             }
         });
+    }
+
+    public void Blogtags(String id,String tag){
+        String[] tagSplit = tag.split("\\s*,\\s*");
+        int num_Tags = tagSplit.length;
+        for(int i = 0; i < num_Tags; i++){
+            multiDBHelper.addBTags(id, tagSplit[i]);
+        }
     }
 }

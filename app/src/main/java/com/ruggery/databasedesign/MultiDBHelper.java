@@ -214,6 +214,13 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.close();
     }
 
+    public void deleteBTags(String ID){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        //deleting row
+        sqLiteDatabase.delete("blogstags", "blog_id=" + ID, null); //made a change here
+        sqLiteDatabase.close();
+    }
+
     public void deleteComment(String ID){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         sqLiteDatabase.delete("comments", "comment_id=" + ID, null); //made a change here
@@ -282,18 +289,38 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         return data;
     }
 
-    public String posBlog(String user){
+    public String retrieveBlogID(String user, String title){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT DISTINCT subject FROM blogs AS B, comments AS C WHERE B.created_by = '" + user + "' " +
-                "AND B.blog_id = (SELECT C.blog_id FROM comments WHERE C.sentiment = 'positive')", null);
-        StringBuilder result = new StringBuilder("");
+        Cursor cursor = db.rawQuery("SELECT blog_id FROM blogs WHERE created_by = '" + user + "' AND subject = '" + title + "'", null);
+        String data = "";
         if(cursor.moveToFirst()){
-            do {
-                result.append(cursor.getString(0) + "\n");
+            do{
+                data = cursor.getString(0);
             }while(cursor.moveToNext());
         }
         cursor.close();
-        return String.valueOf(result);
+        return data;
+    }
+
+    public String posBlog(String user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT DISTINCT subject, sentiment FROM blogs AS B, comments AS C WHERE B.created_by = '" + user + "' " +
+                "AND B.blog_id = C.blog_id", null);
+        StringBuilder result = new StringBuilder("");
+        if(cursor.moveToFirst()){
+            do {
+                result.append(cursor.getString(0) + " ");
+                result.append(cursor.getString(1) + "\n");
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        boolean b = searchBlog(String.valueOf(result));
+        if(b == false) {
+            return String.valueOf(result);
+        }
+        else{
+            return "No Blogs with Positive Comments";
+        }
     }
 
     public String mostBlogs(String date){
@@ -365,5 +392,15 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         else{
             return false;
         }
+    }
+
+    public boolean searchBlog(String test){
+        int intIndex = test.indexOf("negative");
+        if(intIndex == - 1) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }

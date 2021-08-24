@@ -101,6 +101,8 @@ public class BlogActivity extends AppCompatActivity {
                     if((Today.isToday(Calendar.getInstance())) && clickCount <=2) {
                         multiDBHelper.addNotes(title.getText().toString(), des.getText().toString(), currentDate, username);
                         multiDBHelper.addTags(tags.getText().toString());
+                        String blog_id = multiDBHelper.retrieveBlogID(username, title.getText().toString());
+                        Blogtags(blog_id,tags.getText().toString());
                         dialog.cancel();
                         displayNotes();
                         clickCount++;
@@ -111,6 +113,14 @@ public class BlogActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void Blogtags(String id,String tag){
+        String[] tagSplit = tag.split("\\s*,\\s*");
+        int num_Tags = tagSplit.length;
+        for(int i = 0; i < num_Tags; i++){
+            multiDBHelper.addBTags(id, tagSplit[i]);
+        }
     }
 
 }
