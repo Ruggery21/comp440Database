@@ -51,11 +51,20 @@
         android:layout_centerInParent="true"
         android:text="Query"/>
 
+    <Button
+        android:id="@+id/followUsers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="118dp"
+        android:layout_below="@id/query"
+        android:text="Follow other users"/>
+
     <LinearLayout
         android:id="@+id/hobbyLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/query"
+        android:layout_below="@+id/followUsers"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp">
 
@@ -72,5 +81,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
             android:text="Submit"/>
+
     </LinearLayout>
 </RelativeLayout>

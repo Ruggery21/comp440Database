@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DatabaseDesign">
+        <activity android:name=".FollowActivity"></activity>
         <activity android:name=".QueryActivity"></activity>
         <activity android:name=".DisplayCommentActivity" />
         <activity android:name=".CommentActivity" />

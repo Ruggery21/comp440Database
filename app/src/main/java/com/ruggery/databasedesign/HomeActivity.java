@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity{
     private Button blogBtn;
     private Spinner hobbySpinner;
     private Button submitHobby;
+    private Button followUsers;
 
     private Button navToComment;
     private Button query;
@@ -70,6 +71,8 @@ public class HomeActivity extends AppCompatActivity{
 
         navToComment = findViewById(R.id.navToComment);
         query = findViewById(R.id.query);
+
+        followUsers = findViewById(R.id.followUsers);
 
         multiDB = new MultiDBHelper(this);
 
@@ -122,6 +125,15 @@ public class HomeActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, QueryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        followUsers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, FollowActivity.class);
+                intent.putExtra("user_key", user);
                 startActivity(intent);
             }
         });

@@ -355,4 +355,15 @@ public class MultiDBHelper extends SQLiteOpenHelper {
         cursor.close();
         return String.valueOf(result);
     }
+
+    public Boolean checkusername(String username){
+        SQLiteDatabase MyDB = this.getWritableDatabase();
+        Cursor cursor = MyDB.rawQuery("Select * from users where username = ?", new String[] {username});
+        if(cursor.getCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }
